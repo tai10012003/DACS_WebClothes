@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.ProductViewModel
+<div class="row" style="margin-top: 60px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="category">
+            <p style="text-transform:uppercase";>@Model.CateName</p>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="sortSelect">Sắp xếp theo:</label>
+                <select id="sortSelect" class="form-control">
+                    <option value="">Mặc định</option>
+                    <option value="nameAsc">Tên A-Z</option>
+                    <option value="nameDesc">Tên Z-A</option>
+                    <option value="priceAsc">Giá Thấp - Cao</option>
+                    <option value="priceDesc">Giá Cao - Thấp</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Prods)
+            {
+                <div class="col-md-3 col-6">
+                    <div class="card">
+                        <img src="~/images/@item.Image1" class="img-thumbnail" alt="@item.Name">
+                        <p>@item.Name</p>
+                        @if (item.DiscountPrice != null)
+                        {
+                            <p>Giá:  <s>@string.Format("{0:N0}", item.Price) VNĐ</s></p>
+                            <p style="color:red; margin-top: 0">@string.Format("{0:N0}", item.DiscountPrice) VNĐ</p>
+                        }
+                        else
+                        {
+                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                        }
+                        <div class="btn-group" role="group">
+                            <a href="/san-pham/@item.Link-@item.ProductId" class="btn btn-info" role="button">
+                                <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="panel-footer text-center">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("CateProd", new { page = 1, sort = ViewBag.Sort })" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("CateProd", new { page = Model.CurrentPage - 1, sort = ViewBag.Sort })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("CateProd", new { page = i, sort = ViewBag.Sort })">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("CateProd", new { page = Model.CurrentPage + 1, sort = ViewBag.Sort })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("CateProd", new { page = Model.TotalPages, sort = ViewBag.Sort })" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("sortSelect").addEventListener("change", function () {
+                var selectedValue = this.value;
+                var categoryId = '@ViewBag.CategoryId';
+                window.location.href = "@Url.Action("CateProd")?categoryId=" + categoryId + "&sort=" + selectedValue;
+            });
+        });
+    </script>
+}

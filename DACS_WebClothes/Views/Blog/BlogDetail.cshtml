@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    string currentUserName = User.Identity.Name;
+}
+@foreach (var blog in Model.Blogs)
+{
+    <div class="row" style="margin-top: 100px">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h2 class="text-center" style="color:red">@blog.Title</h2>
+            <br>
+            <img src="~/images/@blog.Image" class="img-fluid mx-auto d-block" alt="@blog.Title" style="width: 500px">
+            <div class="content" style="white-space: pre-line; text-indent: 1.5em;">
+                @Html.Raw(blog.Detail)
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+}
+<div class="max-heading">
+    <p>CÁC BÀI VIẾT LIÊN QUAN</p>
+</div>
+<div class="row">
+    @foreach (var relatedBlog in Model.RelatedBlogs)
+    {
+       <div class="col-md-3">
+            <div class="article-box">
+                <img src="~/images/@relatedBlog.Image" alt="@relatedBlog.Title">
+                <div class="article-content">
+                    <h5>@relatedBlog.Title</h5>
+                    <p>
+                        @(
+                            relatedBlog.Content.Length > 60 ? relatedBlog.Content.Substring(0, 60) + "..." : relatedBlog.Content
+                            )
+                    </p>
+                    <button>
+                        <a href="/bai-viet/@relatedBlog.Link-@relatedBlog.BlogId" target="_blank">
+                            Đọc tiếp
+                        </a>
+                    </button>
+                </div>
+            </div>
+       </div> 
+    }
+</div>
+<hr>
+<div class="max-heading">
+    <p>BÌNH LUẬN VỀ BÀI VIẾT</p>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="card-body" style="padding: 0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên người dùng
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Ngày đăng
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comblo in Model.cb)
+                    {
+                        <tr>
+                            <td>
+                                @comblo.User.FullName
+                            </td>
+                            <td>
+                                @comblo.ComBlogName
+                            </td>
+                            <td>
+                                @string.Format("{0:dd/MM/yyyy HH:mm:ss}", comblo.DateBegin)
+                            </td>
+                            <td>
+                                @if (User.Identity.IsAuthenticated && currentUserName == comblo.User.FullName)
+                                {
+                                    <div class="text-center">
+                                        <a href="/CommentBlog/EditCB?BlogId=@Model.BlogId&CommentId=@comblo.ComBlogId" class="btn btn-success">
+                                            <i class="fas fa-edit" style="margin-right: 10px;"></i>Sửa
+                                        </a>
+                                        <a href="/CommentBlog/DeleteCB?BlogId=@Model.BlogId&CommentId=@comblo.ComBlogId" class="btn btn-danger ml-2">
+                                            <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Xóa
+                                        </a>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="text-center">
+                    <a href="/CommentBlog/AddCB?BlogId=@Model.BlogId" class="btn btn-primary">
+                        <i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm bình luận
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <a href="/dang-nhap" class="btn btn-warning">
+                        <i class="fas fa-plus" style="margin-right: 10px;"></i>Đăng nhập để thêm bình luận
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+@section scripts {
+        <script src="~/js/cart.js"></script>
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+}

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.ContactViewModel
+<div class="row" style="margin-top: 60px">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <!-- Bản đồ -->
+        <div class="category">
+            <p>BẢN ĐỒ</p>
+        </div>
+        <div id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d979.8729465242587!2d106.7016703!3d10.7735957!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fdcc9642d95%3A0x8e6153b44bd1903a!2sTRIPLE-T!5e0!3m2!1szh-TW!2s!4v1713684483908!5m2!1szh-TW!2s" width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <!-- Form gửi thắc mắc -->
+        <div class="category">
+            <p>THÔNG TIN LIÊN LẠC</p>
+        </div>
+        <div class="contact-info">
+            <p>
+                Địa chỉ: 42 Tôn Thất Thiệp, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh
+            </p>
+            <p>Điện thoại: 0927749820</p>
+            <p>Email: tripletshop@gmail.com</p>
+        </div>
+        <hr>
+        <div class="category">
+            <p>GỬI THẮC MẮC</p>
+        </div>
+        <div class="contact-form">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Tên:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Nội dung:</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-paper-plane" style="margin-right: 10px";></i>Gửi
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

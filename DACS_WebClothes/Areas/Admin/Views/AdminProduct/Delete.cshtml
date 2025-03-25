@@ -1,0 +1,100 @@
+﻿@model DACS_WebClothes.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XÓA SẢN PHẨM</p>
+                </div>
+                <h3 style="margin-bottom: 10px">Bạn có chắc chắn muốn xóa sản phẩm này ?</h3>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="Name">Tên sản phẩm: </label>
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="FullName">Mô tả: </label>
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Price">Giá: </label>
+                        @Html.DisplayFor(model => model.Price)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Image1">Ảnh 1: </label>
+                        @Html.DisplayFor(model => model.Image1)
+                        <br>
+                        @if (!string.IsNullOrEmpty(Model.Image1))
+                        {
+                            <img src="~/images/@Model.Image1" alt="Product Image" style="max-width:200px;" />
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Image2">Ảnh 2: </label>
+                        @Html.DisplayFor(model => model.Image2)
+                        <br>
+                        @if (!string.IsNullOrEmpty(Model.Image2))
+                        {
+                            <img src="~/images/@Model.Image2" alt="Product Image" style="max-width:200px;" />
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Image3">Ảnh 3: </label>
+                        @Html.DisplayFor(model => model.Image3)
+                        <br>
+                        @if (!string.IsNullOrEmpty(Model.Image3))
+                        {
+                            <img src="~/images/@Model.Image3" alt="Product Image" style="max-width:200px;" />
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Link: </label>
+                        @Html.DisplayFor(model => model.Link)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Ẩn/Hiện: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Loại sản phẩm: </label>
+                        @Html.DisplayFor(model => model.Category.CategoryName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Thương hiệu: </label>
+                        @Html.DisplayFor(model => model.Brand.BrandName)
+                    </div>
+                </div>
+                <form action="~/Admin/AdminProduct/Delete" method="post">
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input type="hidden" name="Id" value="@Model.ProductId" />
+                        <input type="submit" value="Xóa" class="btn btn-create-new" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminProduct/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

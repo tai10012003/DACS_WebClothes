@@ -1,0 +1,44 @@
+﻿@model DACS_WebClothes.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>SỬA LOẠI SẢN PHẨM</p>
+                </div>
+                <form action="~/Admin/AdminCategories/Edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="CategoryId" />
+                    <input type="hidden" name="Id" value="@Model.CategoryId" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Tên loại sản phẩm: </label>
+                            <input asp-for="CategoryName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Link: </label>
+                            <input asp-for="Link" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Ẩn/Hiện: </label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="0" checked name="Hidden"> Hiện</label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="1" name="Hidden" style="margin-left: 20px" ;> Ẩn</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input class="btn btn-create-new" type="submit" value="Lưu" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminCategories/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

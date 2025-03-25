@@ -1,0 +1,251 @@
+﻿@using System.Security.Claims
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    string currentUserName = User.Identity.Name;
+}
+@model DACS_WebClothes.ViewModels.ProductViewModel
+
+@foreach (var item in Model.Prods)
+{
+    <div class="row" style="margin-top: 110px">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="demo" class="carousel slide" data-ride="carousel">
+                        <ul class="carousel-indicators">
+                            <li data-target="#demo" data-slide-to="0" class="active"></li>
+                            <li data-target="#demo" data-slide-to="1"></li>
+                            <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100 img-fluid rounded" src="~/images/@item.Image1" alt="Main Image">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100 img-fluid rounded" src="~/images/@item.Image2" alt="Thumbnail 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100 img-fluid rounded" src="~/images/@item.Image3" alt="Thumbnail 2">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">@item.Name</h3>
+                    <hr>
+                    <div>
+                        @if (item.DiscountPrice != null)
+                        {
+                            <h5>
+                                Giá gốc: <span style="font-weight: bold;"><s>@string.Format("{0:N0}", (float)item.Price) VNĐ</s></span>
+                            </h5>
+                            <h5>
+                                Chỉ còn: <span style="font-weight: bold; color:red">@string.Format("{0:N0}", item.DiscountPrice) VNĐ</span>
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5>
+                                Giá: <span style="font-weight: bold; color: red;">@string.Format("{0:N0}", (float)item.Price) VNĐ</span>
+                            </h5>
+                        }
+                    </div>
+                    <div>
+                        <p>
+                            Loại sản phẩm: <span>@(item.Category != null ? item.Category.CategoryName : "Unknown")</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p style="margin: 10px 0 0 0">
+                            Thương hiệu: <span>@(item.Brand != null ? item.Brand.BrandName : "Unknown")</span>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline" style="margin: 0 0 20px 0">
+                        <button type="button" name="size" value="M" class="btn btn-danger btn-size" onclick="setSize('M')" id="sizeM">M</button>
+                        <button type="button" name="size" value="L" class="btn btn-danger btn-size" onclick="setSize('L')" id="sizeL" style="margin-left: 5px" ;>L</button>
+                        <button type="button" name="size" value="XL" class="btn btn-danger btn-size" onclick="setSize('XL')" id="sizeXL" style="margin-left: 5px" ;>XL</button>
+                        <button type="button" name="size" value="XXL" class="btn btn-danger btn-size" onclick="setSize('XXL')" id="sizeXXL" style="margin-left: 5px" ;>XXL</button>
+                    </div>
+                    <div>
+                        <form id="addToCartForm" action="/Cart/AddItem" method="post" onsubmit="return addToCart()">
+                            <input type="hidden" name="ProductId" value="@item.ProductId">
+                            <input type="hidden" name="Quantity" value="1">
+                            <input type="hidden" name="size" id="selectedSize" value="">
+                            @if (Model.CartItemsCount >= 5)
+                            {
+                                <div class="alert alert-warning" role="alert">
+                                    Bạn đã mua tối đa số lượng 5 sản phẩm trong một đơn hàng.
+                                </div>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger btn-add-to-cart">
+                                    <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Thêm vào giỏ hàng
+                                </button>
+                            }
+                        </form>
+                    </div>
+                    <div class="heading">
+                        <p>MÔ TẢ SẢN PHẨM</p>
+                    </div>
+                    <div class="card-body" style="padding: 0">
+                        <p style="height: 200px; overflow-y: auto;">
+                            <!-- Điều chỉnh kích thước và scroll cho phần mô tả sản phẩm -->
+                            @Html.Raw(item.Description)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="max-heading">
+        <p>CÁC SẢN PHẨM LIÊN QUAN</p>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                @foreach (var it in Model.RelatedProducts)
+                {
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="~/images/@it.Image1" class="img-thumbnail" alt="@it.Name">
+                            <p>@it.Name</p>
+                            @if (it.DiscountPrice != null)
+                            {
+                                <p>Giá:  <s>@string.Format("{0:N0}", it.Price) VNĐ</s></p>
+                                <p style="color:red; margin-top: 0">@string.Format("{0:N0}", it.DiscountPrice) VNĐ</p>
+                            }
+                            else
+                            {
+                                <p>Giá: @string.Format("{0:N0}", it.Price) VNĐ</p>
+                            }
+                            <div class="btn-group" role="group">
+                                <a href="/san-pham/@it.Link-@it.ProductId" class="btn btn-info" role="button">
+                                    <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <hr>
+    <div class="max-heading">
+        <p>BÌNH LUẬN VỀ SẢN PHẨM</p>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card-body" style="padding: 0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên người dùng
+                            </th>
+                            <th>
+                                Nội dung
+                            </th>
+                            <th>
+                                Ngày đăng
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var compro in Model.cp)
+                        {
+                            <tr>
+                                <td>
+                                    @compro.User.FullName
+                                </td>
+                                <td>
+                                    @compro.ComProName
+                                </td>
+                                <td>
+                                    @string.Format("{0:dd/MM/yyyy HH:mm:ss}", compro.DateBegin)
+                                </td>
+                                <td>
+                                    @if (User.Identity.IsAuthenticated && currentUserName == compro.User.FullName)
+                                    {
+                                        <div class="text-center">
+                                            <a href="/CommentProduct/EditCP?ProductId=@Model.ProductId&CommentId=@compro.ComProId" class="btn btn-success">
+                                                <i class="fas fa-edit" style="margin-right: 10px;"></i>Sửa
+                                            </a>
+                                            <a href="/CommentProduct/DeleteCP?ProductId=@Model.ProductId&CommentId=@compro.ComProId" class="btn btn-danger ml-2">
+                                                <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Xóa
+                                            </a>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="text-center">
+                        <a href="/CommentProduct/AddCP?ProductId=@Model.ProductId" class="btn btn-primary">
+                            <i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm bình luận
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <a href="/dang-nhap" class="btn btn-warning">
+                            <i class="fas fa-plus" style="margin-right: 10px;"></i>Đăng nhập để thêm bình luận
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+}
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script>
+        function setSize(size) {
+            // Đặt kích thước đã chọn vào ô input ẩn
+            document.getElementById('selectedSize').value = size;
+
+            // Lấy tất cả các nút kích thước
+            var sizeButtons = document.querySelectorAll('.btn-size');
+
+            // Loại bỏ lớp 'active' khỏi tất cả các nút
+            sizeButtons.forEach(function (button) {
+                button.classList.remove('active');
+            });
+
+            // Thêm lớp 'active' vào nút được bấm
+            event.target.classList.add('active');
+        }
+
+        function addToCart() {
+            // Kiểm tra xem kích thước đã được chọn chưa
+            var selectedSize = document.getElementById('selectedSize').value;
+            if (selectedSize === '') {
+                alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
+                return false; // Ngăn chặn việc gửi form
+            }
+            // Nếu kích thước đã được chọn, thực hiện logic thêm vào giỏ hàng
+            return true; // Cho phép gửi form
+        }
+    </script>
+}
+

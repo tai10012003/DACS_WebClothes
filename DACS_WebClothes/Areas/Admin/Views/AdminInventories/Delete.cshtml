@@ -1,0 +1,61 @@
+﻿@model DACS_WebClothes.Models.Inventory
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XÓA KHO HÀNG</p>
+                </div>
+                <h3 style="margin-bottom: 10px">Bạn có chắc chắn muốn xóa kho hàng này ?</h3>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label">Tên sản phẩm: </label>
+                        @Html.DisplayFor(model => model.Product.Name)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="PlaceOfImport">Nơi nhập hàng: </label>
+                        @Html.DisplayFor(model => model.PlaceOfImport)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="ImportDate">Ngày nhập hàng: </label>
+                        @Html.DisplayFor(model => model.ImportDate)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="ImportPrice">Giá nhập hàng: </label>
+                        @Html.DisplayFor(model => model.ImportPrice)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="InventoryNumber">Số hàng tồn: </label>
+                        @Html.DisplayFor(model => model.InventoryNumber)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Ẩn/Hiện: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <form action="~/Admin/AdminInventories/Delete" method="post">
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input type="hidden" name="Id" value="@Model.InventoryId" />
+                        <input type="submit" value="Xóa" class="btn btn-create-new" />
+                        <a class="btn btn-create-new" href="~/Admin/AdminInventories/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

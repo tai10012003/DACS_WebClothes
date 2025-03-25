@@ -1,0 +1,107 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1 style="text-align:center">QUẢN LÝ BÀI VIẾT</h1>
+    <div class="search-field d-none d-xl-block" style="margin-top: 25px";>
+        <form class="d-flex align-items-center" action="#">
+            <div class="form-group mb-0">
+                <input type="text" class="form-control search-input" placeholder="Tìm kiếm" name="SearchString">
+                <button type="submit" class="btn btn-success search-button ml-2">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center" style="margin-top: -40px" ;>
+        <button class="btn btn-create-new"><a href="~/Admin/AdminBlogs/Create">Tạo Mới</a></button>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tiêu đề
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Chi tiết
+                        </th>
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            Ngày đăng
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Link)
+                        </th>
+
+                        <th>
+                            Ẩn/Hiện
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @{
+                                        var truncatedDescription = item.Content.Length > 10 ? item.Content.Substring(0, 10) + "..." : item.Content;
+                                    }
+                                    @truncatedDescription
+                                </td>
+                                <td>
+                                    @{
+                                        var truncatedDetail = item.Detail.Length > 10 ? item.Detail.Substring(0, 10) + "..." : item.Detail;
+                                    }
+                                    @truncatedDescription
+                                </td>
+                                <td>
+                                    <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" width="100px">
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateBegin)
+                                </td>
+                                <td>
+                                    @{
+                                        var truncatedlink = item.Link.Length > 10 ? item.Link.Substring(0, 10) + "..." : item.Link;
+                                    }
+                                    @truncatedDescription
+                                </td>
+
+                                <td>
+                                    @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                            <a href="~/Admin/AdminBlogs/Edit?id=@item.BlogId">Sửa</a>
+                                        </button>
+                                        <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                            <a href="~/Admin/AdminBlogs/Details?id=@item.BlogId">Chi tiết</a>
+                                        </button>
+                                        <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                            <a href="~/Admin/AdminBlogs/Delete?id=@item.BlogId">Xóa</a>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

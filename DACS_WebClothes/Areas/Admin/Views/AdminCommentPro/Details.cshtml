@@ -1,0 +1,49 @@
+﻿@model DACS_WebClothes.Models.CommentProduct
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XEM CHI TIẾT BÌNH LUẬN</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label">Sản phẩm: </label>
+                        @Html.DisplayFor(model => model.Product.Name)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label">Khách hàng: </label>
+                        @Html.DisplayFor(model => model.User.FullName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label">Nội dung: </label>
+                        @Html.DisplayFor(model => model.ComProName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label">Ngày gửi: </label>
+                        @Html.DisplayFor(model => model.DateBegin)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Ẩn/Hiện: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 50px">
+                    <a class="btn btn-create-new" href="~/Admin/AdminCommentPro/Index" style="margin-left: 10px" ;>Trở lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

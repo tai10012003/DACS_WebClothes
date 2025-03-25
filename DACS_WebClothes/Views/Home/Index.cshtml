@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model DACS_WebClothes.ViewModels.HomeViewModel
+@await Html.PartialAsync("_CategoriesPartial")
+@section scripts {
+        <script src="~/js/cart.js"></script>
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+}

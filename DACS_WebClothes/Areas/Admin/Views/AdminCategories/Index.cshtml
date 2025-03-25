@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <h1 style="text-align:center">QUẢN LÝ LOẠI SẢN PHẨM</h1>
+    <div class="search-field d-none d-xl-block" style="margin-top: 25px" ;>
+        <form class="d-flex align-items-center" action="#">
+            <div class="form-group mb-0">
+                <input type="text" class="form-control search-input" placeholder="Tìm kiếm" name="SearchString">
+                <button type="submit" class="btn btn-success search-button ml-2">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center" style="margin-top: -40px" ;>
+        <button class="btn btn-create-new"><a href="~/Admin/AdminCategories/Create">Tạo Mới</a></button>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên loại sản phẩm
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Link)
+                        </th>
+                        <th>
+                            Ẩn/hiện
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Link)
+                            </td>
+                            <td>
+                                @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminCategories/Edit?id=@item.CategoryId">Sửa</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminCategories/Details?id=@item.CategoryId">Xem chi tiết</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminCategories/Delete?id=@item.CategoryId">Xóa</a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

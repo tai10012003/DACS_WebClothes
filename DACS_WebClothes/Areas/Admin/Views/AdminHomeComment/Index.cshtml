@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center; margin: 20px 0 40px 0;">
+    <h1>DANH MỤC BÌNH LUẬN / ĐÁNH GIÁ</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box_com red">
+                <div class="icon-container">
+                    <i class="icon fas fa-comments"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Bình luận sản phẩm</h5>
+                    <p class="value">@ViewBag.NumberOfCommentProducts</p>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-create-new" type="button">
+                        <a href="/Admin/AdminCommentPro">Xem chi tiết</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box_com green">
+                <div class="icon-container">
+                    <i class="icon fas fa-comment-dots"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Bình luận bài viết</h5>
+                    <p class="value">@ViewBag.NumberOfCommentBlogs</p>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-create-new" type="button">
+                        <a href="/Admin/AdminCommentBlog">Xem chi tiết</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="box_com blue">
+                <div class="icon-container">
+                    <i class="icon fas fa-star"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Đánh giá sản phẩm</h5>
+                    <p class="value"></p>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-create-new" type="button">
+                        <a href="">Xem chi tiết</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

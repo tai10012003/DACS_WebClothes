@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 70px">
+        <div class="col-md-8">
+            <div class="category">
+                <p>CÀI ĐẶT</p>
+            </div>
+            <div class="card-bodi">
+                <div id="google_translate_element" class="d-flex align-items-center">
+                    <p style="font-size: 18px; margin-bottom: 10px; margin-right: 10px;">Ngôn ngữ</p>
+                    <!-- Các phần tử khác ở đây -->
+                </div>
+                <div class="form-check form-switch mx-4 d-flex align-items-centers" style="margin: 0">
+                    <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 18px; margin-right: 10px;">Chế độ màn hình</label>
+                    <input class="form-check-input p-2"
+                           type="checkbox"
+                           role="switch"
+                           id="flexSwitchCheckChecked"
+                           checked
+                           onclick="toggleDarkMode()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            { pageLanguage: 'en' },
+            'google_translate_element'
+        );
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript">
+    function toggleDarkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+
+        // Kiểm tra xem chế độ tối sáng đã được bật hay không
+        var isDarkModeEnabled = element.classList.contains("dark-mode");
+
+        
+        if (isDarkModeEnabled) {
+            languageElement.style.fontSize = "18px";
+            modeElement.style.fontSize = "18px";
+        } else {
+            languageElement.style.fontSize = ""; // Trở về kích thước mặc định
+            modeElement.style.fontSize = ""; // Trở về kích thước mặc định
+        }
+    }
+</script>
+

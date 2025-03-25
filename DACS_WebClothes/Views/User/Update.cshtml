@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 70px">
+        <div class="col-md-8">
+            <div class="category">
+                <p>CẬP NHẬT THÔNG TIN NGƯỜI DÙNG</p>
+            </div>
+            <div class="card-bodi">
+                <form asp-action="Update" asp-controller="User" method="post">
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Tên đăng nhập:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Username" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Họ và tên:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.FullName" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Địa chỉ:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Address" placeholder="Yêu cầu nhập số nhà, hẻm / khu phố / ngõ, đường ...." maxlength="40" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Email:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Email" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Số điện thoại:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Phone" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-save" style="margin-right: 10px;"></i>Lưu thông tin
+                            </button>
+                            <a class="btn btn-secondary" href="/thong-tin">
+                                <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+        <script src="~/js/cart.js"></script>
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+}

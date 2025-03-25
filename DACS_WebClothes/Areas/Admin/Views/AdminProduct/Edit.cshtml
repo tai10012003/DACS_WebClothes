@@ -1,0 +1,91 @@
+﻿@model DACS_WebClothes.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>SỬA SẢN PHẨM</p>
+                </div>
+                <form action="~/Admin/AdminProduct/Edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="Id" value="@Model.ProductId" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Tên sản phẩm: </label>
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Mô tả:</label>
+                            <input asp-for="Description" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Giá: </label>
+                            <input asp-for="Price" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Ảnh 1:</label>
+                            <input type="file" asp-for="Image1" class="form-control" />
+                            <img src="~/images/@Model.Image1" alt="Product Image" style="max-width:200px;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Ảnh 2: </label>
+                            <input type="file" asp-for="Image2" class="form-control" />
+                            <img src="~/images/@Model.Image2" alt="Product Image" style="max-width:200px;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Ảnh 3: </label>
+                            <input type="file" asp-for="Image3" class="form-control" />
+                            <img src="~/images/@Model.Image3" alt="Product Image" style="max-width:200px;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Link:</label>
+                            <input asp-for="Link" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Ẩn/Hiện:</label>
+                            <input asp-for="Hidden" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Loại sản phẩm: </label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Thương hiệu: </label>
+                            <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input class="btn btn-create-new" type="submit" value="Lưu" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminProduct/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   

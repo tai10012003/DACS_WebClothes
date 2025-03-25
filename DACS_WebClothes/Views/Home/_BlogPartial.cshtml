@@ -1,0 +1,38 @@
+﻿@model DACS_WebClothes.ViewModels.HomeViewModel;
+
+<div class="category">
+    <p>TIN TỨC MỚI NHẤT</p>
+</div>
+<div class="row">
+    @foreach (var item in Model.Blogs)
+    {
+        <div class="col-md-3">
+            <div class="article-box" style="padding: 0">
+                <img src="~/images/@item.Image" alt="@item.Title">
+                <div class="article-content">
+                    <h5 style="padding: 0 10px">@item.Title</h5>
+                    <p style="padding: 0 10px">
+                        @(
+                            item.Content.Length > 35 ? item.Content.Substring(0, 35) + "..." : item.Content
+                            )
+                    </p>
+                    <div class="see-more" style="margin-bottom: 15px">
+                        <a href="/bai-viet/@item.Link-@item.BlogId">
+                            <button>ĐỌC TIẾP</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="see-more" style="margin-top: 20px">
+    <a href="/bai-viet">
+        <button>XEM THÊM</button>
+    </a>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

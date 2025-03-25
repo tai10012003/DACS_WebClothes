@@ -1,0 +1,49 @@
+﻿@model DACS_WebClothes.Models.Cart
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XÁC NHẬN ĐƠN HÀNG</p>
+                </div>
+                <h3 style="margin-bottom: 10px">Bạn muốn xác nhận đơn hàng này ?</h3>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="CategoryName">Mã đơn hàng:</label>
+                        @Html.DisplayFor(model => model.OrderId)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="CategoryName">Ngày đặt hàng:</label>
+                        @Html.DisplayFor(model => model.DateBegin)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="CategoryName">Người đặt hàng:</label>
+                        @Html.DisplayFor(model => model.User.FullName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="CategoryName">Trạng thái:</label>
+                        @Html.DisplayFor(model => model.Status)
+                    </div>
+                </div>
+                <form action="~/Admin/Home/UpdateStatus" method="post">
+                    <div class="col-md-12" style="margin-bottom: 30px">
+                        <input type="hidden" name="id" value="@Model.CartId" />
+                        <input type="hidden" name="status" value="Đã Xác Nhận" />
+                        <button type="submit" class="btn btn-create-new text-center">Xác Nhận</button>
+                        <a class="btn btn-create-new text-center" href="~/Admin/Home/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

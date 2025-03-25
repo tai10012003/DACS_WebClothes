@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.CommentBlog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <h1 style="text-align:center">DANH SÁCH BÌNH LUẬN VỀ BÀI VIẾT</h1>
+    <div class="search-field d-none d-xl-block" style="margin-top: 25px" ;>
+        <form class="d-flex align-items-center" action="#">
+            <div class="form-group mb-0">
+                <input type="text" class="form-control search-input" placeholder="Tìm kiếm" name="SearchString">
+                <button type="submit" class="btn btn-success search-button ml-2">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center" style="margin-top: -40px" ;>
+        <button class="btn btn-create-new"><a href="~/Admin/AdminHomeComment">Trở về mục bình luận</a></button>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Bài viết
+                        </th>
+                        <th>
+                            Khách hàng
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Ngày gửi
+                        </th>
+                        <th>
+                            Ẩn/hiện
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Blog.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ComBlogName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateBegin)
+                            </td>
+                            <td>
+                                @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminCommentBlog/Details?id=@item.ComBlogId">Xem chi tiết</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminCommentBlog/Delete?id=@item.ComBlogId">Xóa</a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

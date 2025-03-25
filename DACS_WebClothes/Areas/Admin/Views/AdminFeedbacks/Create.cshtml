@@ -1,0 +1,49 @@
+﻿@model DACS_WebClothes.Models.CommentProduct
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Create</h1>
+
+<h4>Feedback</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/AdminFeedbacks/Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.Users"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                    <select asp-for="ProductId" class="form-control" asp-items="ViewBag.BoardGames"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComProName" class="control-label"></label>
+                    <input asp-for="ComProName" class="form-control" />
+                    <span asp-validation-for="ComProName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateBegin" class="control-label"></label>
+                <input asp-for="DateBegin" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" class="form-control" readonly />
+                <span asp-validation-for="DateBegin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderIndex" class="control-label"></label>
+                <input asp-for="OrderIndex" class="form-control" />
+                <span asp-validation-for="OrderIndex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="~/Admin/AdminFeedbacks/Index">Back to List</a>
+</div>
+</div>

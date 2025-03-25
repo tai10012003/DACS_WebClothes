@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Shop Bán Hàng Thời Trang 3T</title>
+    <link rel="stylesheet" href="~/Admin/assets/css/style.css" />
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .btn-create-new {
+            background-color: black !important;
+            color: white !important;
+            border: none !important;
+            width: 130px !important;
+            border-radius: 5px !important;
+            padding: 8px 8px !important;
+            font-size: 16px !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s, color 0.3s !important;
+        }
+
+            .btn-create-new a {
+                width: 100%; /* Chiều rộng 100% của phần tử cha */
+                text-align: center; /* Canh chỉnh văn bản vào giữa */
+            }
+
+            .btn-create-new:hover {
+                background-color: white !important;
+                color: black !important;
+                border: 1px solid black !important;
+            }
+
+            .btn-create-new a:hover {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            .btn-create-new a {
+                color: inherit !important;
+                text-decoration: none !important;
+                padding: 0 !important;
+            }
+
+        .search-field {
+            display: flex !important; /* Sử dụng flexbox để các phần tử nằm cùng hàng */
+            align-items: center !important; /* Căn các phần tử theo chiều dọc */
+            justify-content: center !important; /* Căn các phần tử theo chiều ngang */
+        }
+
+        .search-input {
+            flex: 1 !important; /* Ô tìm kiếm sẽ mở rộng ra toàn bộ không gian còn trống */
+            border-radius: 5px 0 0 5px !important; /* Bo tròn góc bên trái của ô tìm kiếm */
+            padding: 10px !important; /* Thêm padding cho ô tìm kiếm */
+            width: 300px !important;
+        }
+
+        .search-button {
+            border-radius: 0 5px 5px 0 !important; /* Bo tròn góc bên phải của nút tìm kiếm */
+            background-color: black !important; /* Màu nền của nút tìm kiếm */
+            color: white !important; /* Màu chữ của nút tìm kiếm */
+            padding: 10px 20px !important; /* Thêm padding cho nút tìm kiếm */
+        }
+
+        .category {
+            margin: 35px 0 !important;
+            font-size: 30px !important; /* Kích thước chữ */
+            text-align: center !important;
+            font-weight: bold !important;
+            font-family: 'Bebas Neue', cursive !important;
+            color: black !important; /* Màu chữ */
+            transition: all 0.8s ease !important; /* Hiệu ứng chuyển động */
+        }
+
+        category p {
+            margin: 0 !important; /* Xóa margin mặc định của thẻ p */
+        }
+
+        .category:hover {
+            border-bottom: 2px solid rgba(255, 0, 0, 1) !important; /* Viền đỏ khi hover */
+            color: red !important; /* Màu chữ khi hover */
+            transform: scale(1.05) !important; /* Hiệu ứng scale khi hover */
+        }
+
+        /* Kích thước chuẩn cho label */
+        .control-label {
+            font-size: 16px !important;
+        }
+
+        /* Khoảng cách giữa các hàng */
+        .form-group.row {
+            margin-bottom: 20px !important;
+        }
+
+        /* Căn lề phải cho label */
+        .control-label {
+            text-align: right !important;
+            margin-right: 15px !important;
+        }
+
+        /* Khoảng cách giữa label và input */
+        .form-group.row .col-md-8 {
+            padding-left: 0 !important;
+        }
+
+        .col-md-8 input {
+            padding: 5px;
+            border: 1px solid #d6d6d6;
+            width: 100%;
+        }
+
+        .col-md-12 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .box {
+            border-radius: 5px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            margin: 0 30px 0 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+
+        .red {
+            background-color: #ff6961; /* Màu đỏ */
+        }
+
+        .green {
+            background-color: #77dd77; /* Màu xanh lá */
+        }
+
+        .blue {
+            background-color: #aec6cf; /* Màu xanh dương */
+        }
+
+        .icon-container {
+            flex: 0.5;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Căn giữa nội dung */
+        }
+
+        .icon {
+            font-size: 30px;
+        }
+
+        .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Căn giữa nội dung */
+        }
+
+        .title {
+            margin: 0;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .value {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #000; /* Màu đen */
+        }
+
+        .navbar {
+            background-color: #000; /* Màu nền đen */
+            color: #fff; /* Màu chữ trắng */
+            width: 100%;
+            padding: 15px;
+            margin: -20px -20px 30px -20px;
+        }
+        .text-white {
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .box_com {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; /* Adjust spacing */
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 250px;
+            width: 500px;
+            text-align: center;
+            position: relative; /* For positioning button at the bottom */
+        }
+
+        .box_com.red { background-color: #f8d7da; }
+        .box_com.green { background-color: #d4edda; }
+        .box_com.blue { background-color: #cce5ff; margin-left: 20px;}
+
+        .box_com .icon-container {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .box_com .info {
+            flex-grow: 1;
+        }
+
+        .box_com .info .title {
+            margin: 0;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .box_com .info .value {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .box_com .btn-create-new {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .box_com .btn-create-new a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .box_com .btn-create-new:hover {
+            background-color: #0056b3;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/Admin" class="logo" style="padding-bottom: 5px" ;>
+                        <img src="~/images/logoChothes.jpg">
+                        <span class="nav-item">Admin</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin">
+                        <i class="fas fa-home"></i>
+                        <span class="nav-item">Trang chủ</span>
+                    </a>
+                </li>
+                <li id="dropdown">
+                    <a href="#">
+                        <i class="fas fa-window-restore"></i>
+                        <span class="nav-item">Quản Lý</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/AdminHomeComment">
+                        <i class="fas fa-comment-dots"></i>
+                        <span class="nav-item">Bình luận / ĐG</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/AdminStatistical">
+                        <i class="fas fa-chart-bar"></i>
+                        <span class="nav-item">Thống kê</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/trang-chu" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="nav-item">Đăng xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <section class="main" style="background-color: whitesmoke";>
+            @RenderBody()
+        </section>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdown = document.getElementById('dropdown');
+            let subnav = null; // Lưu trữ phần tử ul hiện tại
+            let subnavVisible = false;
+
+            dropdown.addEventListener('click', function () {
+                if (!subnav) {
+                    subnav = document.createElement('ul');
+                    subnav.innerHTML = `
+                              <li><a href="/Admin/AdminProduct"><i class="fas"></i>Sản phẩm</a></li>
+                              <li><a href="/Admin/AdminCategories"><i class="fas"></i>Loại sản phẩm</a></li>
+                              <li><a href="/Admin/AdminBlogs"><i class="fas"></i>Bài viết</a></li>
+                              <li><a href="/Admin/AdminUsers"><i class="fas"></i>Người dùng</a></li>
+                              <li><a href="/Admin/AdminOrder"><i class="fas"></i>Đơn hàng</a></li>
+                              <li><a href="/Admin/AdminDiscount"><i class="fas"></i>Giảm giá</a></li>
+                              <li><a href="/Admin/AdminInventories"><i class="fas"></i>Kho hàng</a></li>
+                            `;
+                    dropdown.appendChild(subnav);
+                    subnavVisible = true;
+
+                    // Thêm lắng nghe sự kiện click cho mỗi mục con của submenu
+                    const subnavItems = subnav.querySelectorAll('li');
+                    subnavItems.forEach(item => {
+                        item.addEventListener('click', function (event) {
+                            // Ngăn chặn sự kiện click từ việc lan truyền lên
+                            event.stopPropagation();
+                            // In ra thông báo cảnh báo để kiểm tra xem sự kiện click của mục con có được kích hoạt không
+                            console.log("Clicked on submenu item!");
+                        });
+                    });
+                } else {
+                    subnav.classList.toggle('hidden');
+                    subnavVisible = !subnavVisible;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿@model DACS_WebClothes.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>SỬA NGƯỜI DÙNG</p>
+                </div>
+                <form action="~/Admin/AdminUsers/Edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="@Model.UserId" />
+                    <input type="hidden" name="Userid" value="@Model.UserId" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="control-label" name="Username">Tên đăng nhập: </label>
+                            <input class="form-control" type="text" name="Username" value="@Model.Username" />
+                        </div>
+                    </div>
+                    <input class="form-control" type="hidden" name="Password" value="@Model.Password" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="control-label" for="FullName">Họ tên: </label>
+                            <input class="form-control" type="text" name="FullName" value="@Model.FullName" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="control-label" for="Address">Địa chỉ: </label>
+                            <input class="form-control" type="text" name="Address" value="@Model.Address" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="control-label" for="Email">Email: </label>
+                            <input class="form-control" type="email" name="Email" value="@Model.Email" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="control-label" for="Phone">Số điện thoại: </label>
+                            <input class="form-control" type="tel" name="Phone" value="@Model.Phone" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Quyền: </label>
+                            <input type="radio" class="form-control" asp-for="Permission" value="0" checked name="Permission"> Người dùng</label>
+                            <input type="radio" class="form-control" asp-for=" Permission" value="1" name="Permission" style="margin-left: 20px" ;>Quản trị viên</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Trạng thái tài khoản: </label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="0" checked name="Hidden"> Hoạt động</label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="1" name="Hidden" style="margin-left: 20px" ;> Khóa</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input type="submit" value="Lưu" class="btn btn-create-new" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminUsers/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

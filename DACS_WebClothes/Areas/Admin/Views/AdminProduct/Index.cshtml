@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <h1 style="text-align:center">QUẢN LÝ SẢN PHẨM</h1>
+    <div class="search-field d-none d-xl-block" style="margin-top: 25px" ;>
+        <form class="d-flex align-items-center" action="#">
+            <div class="form-group mb-0">
+                <input type="text" class="form-control search-input" placeholder="Tìm kiếm" name="SearchString">
+                <button type="submit" class="btn btn-success search-button ml-2">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center" style="margin-top: -40px" ;>
+        <button class="btn btn-create-new"><a href="~/Admin/AdminProduct/Create">Tạo Mới</a></button>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên
+                        </th>
+                        <th>
+                            Mô tả
+                        </th>
+                        <th>
+                            Giá
+                        </th>
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Link)
+                        </th>
+                        <th>
+                            Loại sản phẩm
+                        </th>
+                        <th>
+                            Thương hiệu
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @{
+                                    // Truncate description to 100 characters
+                                    var truncatedDescription = item.Description.Length > 10 ? item.Description.Substring(0, 10) + "..." : item.Description;
+                                }
+                                @truncatedDescription
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                <img src="~/images/@Html.DisplayFor(modelItem => item.Image1)" width="100px">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Link)
+                            </td>
+                            <td>
+                                @item.Category.CategoryName
+                            </td>
+                            <td>
+                                @item.Brand.BrandName
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminProduct/Edit?id=@item.ProductId">Sửa</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminProduct/Details?id=@item.ProductId">Xem chi tiết</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminProduct/Delete?id=@item.ProductId">Xóa</a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

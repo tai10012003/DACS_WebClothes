@@ -1,0 +1,99 @@
+﻿@model DACS_WebClothes.ViewModels.HomeViewModel
+
+<nav class="navbar navbar-expand-sm bg-light navbar-dark">
+    <!-- Brand/logo -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <div class="">
+                <a href="/trang-chu">
+                    <img src="~/images/logoChothes.jpg" alt="logo thời trang" class="logo">
+                </a>
+            </div>
+        </ul>
+        <!-- Menu nằm giữa -->
+        <ul class="navbar-nav">
+            @foreach (var item in Model.Menus)
+            {
+                <li class="nav-item"><a href="/@item.Link" class="nav-link">@item.Title</a></li>
+            }
+        </ul>
+        <!-- Menu bên phải -->
+        <ul class="navbar-nav">
+            <div class="icons-container">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="search-icon">
+                        <img src="~/images/search.png" alt="" id="toggleNavButton">
+                    </a>
+                    <a href="/cart" class="cart-icon">
+                        <img src="~/images/cart.png" alt="">
+                        <span class="cart-item-count">0</span>
+                    </a>
+                    <div class="item">
+                        <a href="">
+                            <img src="~/images/user.png" alt="" style="width: 50px;">
+                        </a>
+                        <div class="subnav">
+                            <div class="item">
+                                <a href="/thong-tin">
+                                    <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Thông tin cá nhân
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="/don-hang-cua-toi">
+                                    <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Đơn hàng của tôi
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="#">
+                                    <i class="fas fa-heart" style="margin-right: 10px;"></i>Sản phẩm yêu thích
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="/setting">
+                                    <i class="fas fa-cog" style="margin-right: 10px;"></i>Cài Đặt
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="/dang-xuat">
+                                    <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>Đăng xuất
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <a class="search-icon">
+                        <img src="~/images/search.png" alt="" id="toggleNavButton">
+                    </a>
+                    <a href="/cart" class="cart-icon">
+                        <img src="~/images/cart.png" alt="">
+                        <span class="cart-item-count">0</span>
+                    </a>
+                    <div class="item">
+                        <a href="">
+                            <img src="~/images/user.png" alt="" style="width: 50px;">
+                        </a>
+                        <div class="subnav">
+                            <div class="item">
+                                <a href="/dang-nhap">
+                                    <i class="fas fa-sign-in-alt" style="margin-right: 10px"></i>Đăng nhập
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="/setting">
+                                    <i class="fas fa-cog" style="margin-right: 10px;"></i>Cài Đặt
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </ul>
+    </div>
+</nav>
+

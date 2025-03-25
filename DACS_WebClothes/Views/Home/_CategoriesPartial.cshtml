@@ -1,0 +1,60 @@
+﻿@model DACS_WebClothes.ViewModels.HomeViewModel
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="category" style="margin-bottom: 10px;">
+            <p>DANH MỤC SẢN PHẨM</p>
+        </div>
+        @foreach (var category in Model.Categories)
+        {
+            <ul class="nav">
+                <li><a href="" class="category">@category.CategoryName</a></li>
+            </ul>
+            <div class="row" id="productList">
+                @foreach (var categoryProducts in Model.CategoryProducts)
+                {
+                    foreach (var item in categoryProducts.Value)
+                    {
+                        if (item.CategoryId == category.CategoryId)
+                        {
+                            <div class="col-md-3 col-6">
+                                <div class="card">
+                                    <img src="~/images/@item.Image1" class="img-thumbnail" alt="@item.Name">
+                                    <p>@item.Name</p>
+                                    @if (item.DiscountPrice != null)
+                                    {
+                                        <p>Giá:  <s>@string.Format("{0:N0}", item.Price) VNĐ</s></p>
+                                        <p style="color:red; margin-top: 0">@string.Format("{0:N0}", item.DiscountPrice) VNĐ</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                                    }
+                                    <div class="btn-group" role="group">
+                                        <a href="san-pham/@item.Link-@item.ProductId" class="btn btn-info" role="button">
+                                            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div class="see-more" style="margin-bottom: 15px">
+                <a href="@Url.Action("CateProd", "Product")?categoryId=@category.CategoryId">
+                    <button>XEM THÊM</button>
+                </a>
+            </div>
+            <hr>
+        }
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

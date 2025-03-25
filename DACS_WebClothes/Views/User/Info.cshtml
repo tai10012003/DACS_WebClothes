@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.UserViewModel
+@using System.Security.Claims
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 70px">
+        <div class="col-md-8">
+            <div class="category">
+                <p>THÔNG TIN NGƯỜI DÙNG</p>
+            </div>
+            <div class="card-bodi">
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Tên đăng nhập:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Username" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Họ và tên:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.FullName" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Địa chỉ:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Address" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Email:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Email" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label">Số điện thoại:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" asp-for="Register.Phone" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                string username = User.Identity.Name;
+                                string permission = User.FindFirst(ClaimTypes.Role)?.Value;
+                                if (permission == "1")
+                                {
+                                    <a class="btn btn-danger" href="/Admin">
+                                        <i class="fas fa-user-shield" style="margin-right: 10px;"></i>Quản trị viên
+                                    </a>
+                                    <a class="btn btn-info" href="@Url.Action("Update", "User")">
+                                        <i class="fas fa-user-edit" style="margin-right: 10px;"></i>Cập nhật thông tin
+                                    </a>
+                                    <a class="btn btn-success" href="@Url.Action("ChangePassword", "User")">
+                                        <i class="fas fa-key" style="margin-right: 10px;"></i>Đổi mật khẩu
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-info" href="@Url.Action("Update", "User")">
+                                        <i class="fas fa-user-edit" style="margin-right: 10px;"></i>Cập nhật thông tin
+                                    </a>
+                                    <a class="btn btn-success" href="@Url.Action("ChangePassword", "User")">
+                                        <i class="fas fa-key" style="margin-right: 10px;"></i>Đổi mật khẩu
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

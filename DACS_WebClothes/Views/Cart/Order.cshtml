@@ -1,0 +1,309 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    decimal totalPrice = 0; // Tạo biến để tính tổng tiền
+}
+@model DACS_WebClothes.ViewModels.CartViewModel;
+<div class="container" style="margin-top: 100px;">
+    <div class="max-heading">
+        <p>THÔNG TIN ĐƠN HÀNG</p>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="padding: 0">
+            <div style="border: 1px solid #ccc; padding: 10px;">
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ĐỊA CHỈ GIAO HÀNG</div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Họ và tên:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" asp-for="Register.FullName" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Email:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" asp-for="Register.Email" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Số điện thoại:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" asp-for="Register.Phone" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Chọn tỉnh thành:</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="city" required>
+                            <option value="" selected>Chọn tỉnh thành</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Chọn quận huyện:</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="district" required>
+                            <option value="" selected>Chọn quận huyện</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Chọn phường xã:</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="ward" required>
+                            <option value="" selected>Chọn phường xã</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Địa chỉ cụ thể:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" asp-for="Register.Address" readonly />
+                    </div>
+                </div>
+                <input class="billing_address_1" name="" type="hidden" value="">
+                <input class="billing_address_2" name="" type="hidden" value="">
+                <div class="form-group row">
+                    <label class="col-md-4 control-label">Ghi chú đơn hàng:</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="shippingMethod" class="col-md-5">Phương thức vận chuyển:</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="shippingMethod">
+                            <option value="Giao Hàng Tiêu Chuẩn" data-fee="30000">Giao hàng tiêu chuẩn</option>
+                            <option value="Giao Hàng Nhanh" data-fee="50000">Giao hàng nhanh</option>
+                            <option value="Giao Hàng Tiết Kiệm" data-fee="20000">Giao hàng tiết kiệm</option>
+                            <option value="Giao Hàng Trong Ngày" data-fee="70000">Giao hàng trong ngày</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="paymentmethod" class="col-md-5">Phương thức thanh toán:</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="paymentmethod">
+                            <option value="Thanh toán khi nhận hàng (COD)" selected>Thanh toán khi nhận hàng (COD)</option>
+                            <option value="Thanh toán VNPay">Thanh toán VNPay</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 10px">
+            <!-- Bảng sản phẩm và tổng tiền -->
+            @if (Model.CartItems.Count > 0)
+            {
+                <div style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped table-bordered table-white">
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td class="text-center align-middle" colspan="2">
+                                        <div style="display: flex; align-items: center;">
+                                            <img src="~/images/@item.Product.Image1" alt="@item.Product.Name" style="width: 100px; margin-right: 10px;">
+                                            <div>
+                                                <p>@item.Product.Name</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <p>@item.Size</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        @{
+                                            decimal itemTotalPrice;
+                                            if (item.Product.DiscountPrice != null)
+                                            {
+                                                itemTotalPrice = item.Product.DiscountPrice.GetValueOrDefault(0) * item.Quantity;
+
+                                            }
+                                            else
+                                            {
+                                                itemTotalPrice = item.Product.Price.GetValueOrDefault(0) * item.Quantity;
+
+                                            }
+
+                                            totalPrice += itemTotalPrice; // Cộng vào tổng tiền
+                                        }
+                                        @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", itemTotalPrice)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div style="border: 1px solid #ccc; padding: 10px;">
+                    <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">ĐƠN HÀNG</div>
+                    <div style="font-size: 18px">
+                        <strong>Tạm tính: <span class="text-danger" id="subtotal">@String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", totalPrice)</span></strong>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-9">
+                            <div class="input-group w-100">
+                                <input type="text" name="inputDcName" class="form-control" placeholder="Nhập code khuyến mãi">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-inline justify-content-end mb-3">
+                                <button id="applyPromoCode" type="button" class="btn btn-primary">Áp dụng</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="DsName" name="inputDcName" />
+                    <div style="font-size: 18px">
+                        <strong>Giảm giá: <span class="text-danger" id="discounted">0 VND</span></strong>
+                    </div>
+                    <div style="margin-top: 15px">
+                        <strong>Phí vận chuyển: <span class="text-danger" id="shippingFee">0 VND</span></strong>
+                    </div>
+                    <hr>
+                    <div style="font-size: 18px">
+                        <strong>Tổng tiền: <span class="text-danger" id="finalPrice">@String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", totalPrice)</span></strong>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between" style="margin-top: 20px">
+                    <div>
+                        <a href="/cart">Quay lại giỏ hàng</a>
+                    </div>
+                    <div>
+                        @using (Html.BeginForm("Order", "Cart", FormMethod.Post, new { id = "orderForm" }))
+                        {
+                            <input type="submit" id="paymentCODButton" name="payment" class="btn btn-success" style="margin-top: 10px; display: none;" value="Hoàn tất đơn hàng (COD)">
+                            <input type="hidden" name="paymentMethod" id="paymentMethodField" value="Thanh toán khi nhận hàng (COD)">
+                            <input type="hidden" name="transportMethod" id="transportMethodField" value="">
+                            <input type="hidden" name="Amount" id="AmountField" value="">
+                        }
+                        @using (Html.BeginForm("Order", "Cart", FormMethod.Post, new { id = "paymentVNPayForm" }))
+                        {
+                            <input type="submit" id="paymentVNPayButton" name="payment" class="btn btn-success" style="margin-top: 10px; display: none;" value="Hoàn tất đơn hàng (VNPay)">
+                            <input type="hidden" name="Amount" value="@totalPrice" />
+                            <input type="hidden" name="paymentMethod" id="paymentMethodField_VNPay" value="Thanh toán VNPay">
+                            <input type="hidden" name="transportMethod" id="transportMethodField_VNPay" value="">
+                        }
+                    </div>
+                </div>  
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function convertToVietnameseCurrency(number) {
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+            }
+
+            var totalPrice = @totalPrice;
+            var discounted = 0;
+
+            function calculateFinalPrice() {
+                var shippingFee = parseFloat($('#shippingMethod option:selected').data('fee')) || 0;
+                var finalPrice = totalPrice + shippingFee - discounted;
+                $('#shippingFee').text(convertToVietnameseCurrency(shippingFee));
+                $('#finalPrice').text(convertToVietnameseCurrency(finalPrice));
+
+                // Gán giá trị tổng tiền vào trường Amount
+                $('#AmountField').val(finalPrice);
+
+                // Gán giá trị phương thức vận chuyển vào trường transportMethod
+                var selectedShippingMethod = $('#shippingMethod').val();
+                $('#transportMethodField').val(selectedShippingMethod);
+                $('#transportMethodField_VNPay').val(selectedShippingMethod);
+            }
+
+            $('#applyPromoCode').on('click', function () {
+                var dsName = $('input[name="inputDcName"]').val();
+                $('#DsName').val(dsName);
+                $.ajax({
+                    url: '/Cart/ApplyPromoCode',
+                    dataType: 'json',
+                    type: 'GET',
+                    data: { code: dsName, totalPrice: totalPrice },
+                    success: function (res) {
+                        if (res.status) {
+                            discounted = res.discounted;
+                            calculateFinalPrice();
+                            $('#discounted').text(convertToVietnameseCurrency("-" + discounted));
+                            alert("Áp dụng mã khuyến mãi thành công");
+                        } else {
+                            alert(res.error);
+                        }
+                    }
+                });
+            });
+
+            $('#shippingMethod').on('change', calculateFinalPrice);
+
+            function updatePaymentButtons() {
+                var selectedPaymentMethod = $('#paymentmethod').val();
+                if (selectedPaymentMethod === "Thanh toán khi nhận hàng (COD)") {
+                    $('#paymentCODButton').show();
+                    $('#paymentVNPayButton').hide();
+                } else if (selectedPaymentMethod === "Thanh toán VNPay") {
+                    $('#paymentCODButton').hide();
+                    $('#paymentVNPayButton').show();
+                }
+            }
+
+            // Assign the selected payment method value to the hidden field
+            $('#paymentmethod').on('change', function () {
+                var selectedPaymentMethod = $(this).val();
+                $('#paymentMethodField').val(selectedPaymentMethod);
+                $('#paymentMethodField_VNPay').val(selectedPaymentMethod);
+            });
+
+            $('#paymentmethod').on('change', updatePaymentButtons);
+            // Call the updatePaymentButtons function when the page loads
+            $(document).ready(function () {
+                updatePaymentButtons();
+            });
+
+            // Lấy dữ liệu thành phố và quận huyện từ JSON
+            axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json")
+                .then(function (response) {
+                    renderCity(response.data);
+                });
+
+            function renderCity(data) {
+                data.forEach(city => {
+                    $('#city').append(new Option(city.Name, city.Id));
+                });
+
+                $('#city').on('change', function () {
+                    $('#district').empty().append(new Option("Chọn quận huyện", ""));
+                    $('#ward').empty().append(new Option("Chọn phường xã", ""));
+                    var cityId = $(this).val();
+                    if (cityId) {
+                        var districts = data.find(city => city.Id === cityId).Districts;
+                        districts.forEach(district => {
+                            $('#district').append(new Option(district.Name, district.Id));
+                        });
+                    }
+                });
+
+                $('#district').on('change', function () {
+                    $('#ward').empty().append(new Option("Chọn phường xã", ""));
+                    var districtId = $(this).val();
+                    var cityId = $('#city').val();
+                    if (cityId && districtId) {
+                        var wards = data.find(city => city.Id === cityId)
+                            .Districts.find(district => district.Id === districtId)
+                            .Wards;
+                        wards.forEach(ward => {
+                            $('#ward').append(new Option(ward.Name, ward.Id));
+                        });
+                    }
+                });
+            }
+            calculateFinalPrice(); // Tính toán tổng tiền khi tải trang
+            updatePaymentButtons();
+        });
+    </script>
+}

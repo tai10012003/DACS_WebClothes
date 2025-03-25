@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.CartViewModel
+
+<div class="container text-center" style="margin-top: 100px">
+    <div class="max-heading">
+        <p>ĐẶT HÀNG THÀNH CÔNG</p>
+    </div>
+    <p style="margin-top: 10px">Bạn vừa mua hàng thành công! Chúng tôi sẽ gọi điện cho số điện thoại <span style="color: red">@Model.Register.Phone</span> của anh <span style="color: red">@Model.Register.FullName</span> để xác nhận đơn hàng. 3T Store xin cảm ơn!</p>
+</div>

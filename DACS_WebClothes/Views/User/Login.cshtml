@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 70px">
+        <div class="col-md-8">
+            <div class="category">
+                <p>ĐĂNG NHẬP HỆ THỐNG</p>
+            </div>
+            <div class="card-bodi">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+                <form class="form-horizontal justify-content-center" asp-action="Login" asp-controller="User" method="POST">
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="Register.Username" class="control-label col-md-3">Tên đăng nhập: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.Username"
+                                   placeholder="Nhập tên đăng nhập" autofocus required />
+                            <span asp-validation-for="Register.Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="Register.Password" class="control-label col-md-3">Mật khẩu: </label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" asp-for="Register.Password" id="password" placeholder="Nhập mật khẩu" required />
+                            <span asp-validation-for="Register.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center align-items-center">
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-danger btn-block">
+                                <i class="fas fa-sign-in-alt " style="margin-right: 10px"></i> Đăng nhập
+                            </button>
+                            <a href="@Url.Action("GoogleLogin", "User")" class="btn btn-danger btn-block" style="margin-top: 15px;">
+                                <i class="fas fa-sign-in-alt" style="margin-right: 10px"></i>Đăng nhập Google
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <p class="text-center">Chưa có tài khoản? <a href="dang-ky">Đăng ký</a> hoặc <a href="#">Quên mật khẩu</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

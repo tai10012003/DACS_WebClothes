@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.CommentProduct>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Quản lý phản hồi</h1>
+
+<p>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminFeedbacks/Create">Tạo Mới</a></button>
+</p>
+    <div class="search-field d-none d-xl-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="tên sản phẩm" name="SearchString">
+                <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+            </div>
+        </form>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <h1>Attendance List</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ComProName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateBegin)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderIndex)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ComProName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateBegin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderIndex)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Username)
+                            </td>
+                            <td>
+                                <button class="btn btn-inverse-warning" type="button">
+                                    <a href="~/Admin/AdminFeedbacks/Edit?id=@item.ComProId">Edit</a>
+                                </button>
+                                <button class="btn btn-inverse-success" type="button">
+                                    <a href="~/Admin/AdminFeedbacks/Details?id=@item.ComProId">Details</a>
+                                </button>
+                                <button class="btn btn-inverse-danger" type="button">
+                                    <a href="~/Admin/AdminFeedbacks/Delete?id=@item.ComProId">Delete</a>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

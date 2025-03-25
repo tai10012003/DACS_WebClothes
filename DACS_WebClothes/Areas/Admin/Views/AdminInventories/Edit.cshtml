@@ -1,0 +1,62 @@
+﻿@model DACS_WebClothes.Models.Inventory
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>SỬA KHO HÀNG</p>
+                </div>
+                <form action="~/Admin/AdminInventories/Edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="InventoryId" />
+                    <input type="hidden" name="Id" value="@Model.InventoryId" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Sản phẩm: </label>
+                            <select asp-for="InventoryId" class="form-control" asp-items="ViewBag.Products"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Nơi nhập hàng: </label>
+                            <input asp-for="PlaceOfImport" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Ngày nhập hàng: </label>
+                            <input asp-for="ImportDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Giá nhập hàng: </label>
+                            <input asp-for="ImportPrice" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Số hàng tồn: </label>
+                            <input asp-for="InventoryNumber" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Ẩn/Hiện: </label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="0" checked name="Hidden"> Hiện</label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="1" name="Hidden" style="margin-left: 20px" ;> Ẩn</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input class="btn btn-create-new" type="submit" value="Lưu" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminInventories/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

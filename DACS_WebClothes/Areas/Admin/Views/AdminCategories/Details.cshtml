@@ -1,0 +1,39 @@
+﻿@model DACS_WebClothes.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XEM THÔNG TIN LOẠI SẢN PHẨM</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="CategoryName">Tên loại sản phẩm: </label>
+                        @Html.DisplayFor(model => model.CategoryName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Link">Link: </label>
+                        @Html.DisplayFor(model => model.Link)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Hidden">Ẩn/Hiện: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 50px">
+                    <a href="~/Admin/AdminCategories/Edit?id=@Model.CategoryId" class="btn btn-create-new">Sửa</a>
+                    <a class="btn btn-create-new text-center" href="~/Admin/AdminCategories/Index" style="margin-left: 10px" ;>Trở lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model DACS_WebClothes.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XEM THÔNG TIN BÀI VIẾT</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="Title">Tiêu đề: </label>
+                        @Html.DisplayFor(model => model.Title)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Content">Nội dung: </label>
+                        @Html.DisplayFor(model => model.Content)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Detail">Chi tiết: </label>
+                        @Html.DisplayFor(model => model.Detail)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Image">Hình ảnh: </label>
+                        @Html.DisplayFor(model => model.Image)
+                        <br>
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="~/images/@Model.Image" alt="Blog Image" style="max-width:200px;" />
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="DateBegin">Ngày đăng: </label>
+                        @Html.DisplayFor(model => model.DateBegin)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label" for="Link">Link: </label>
+                        @Html.DisplayFor(model => model.Link)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label" for="Hidden">Ẩn/Hiện: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 50px">
+                    <a href="~/Admin/AdminUsers/Edit?id=@Model.BlogId" class="btn btn-create-new">Sửa</a>
+                    <a class="btn btn-create-new text-center" href="~/Admin/AdminBlogs/Index" style="margin-left: 10px" ;>Trở lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

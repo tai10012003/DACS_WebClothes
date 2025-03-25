@@ -1,0 +1,50 @@
+﻿@model DACS_WebClothes.Models.Discount
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>SỬA MÃ GIẢM GIÁ</p>
+                </div>
+                <form action="~/Admin/AdminDiscount/Edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="DiscountId" />
+                    <input type="hidden" name="Id" value="@Model.DiscountId" />
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Mã giảm giá: </label>
+                            <input asp-for="DiscountName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Giảm (%): </label>
+                            <input asp-for="DiscountPercent" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label class="col-md-4 control-label">Ngày hết hạn: </label>
+                            <input asp-for="ExpirationDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center">
+                            <label class="control-label">Ẩn/Hiện: </label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="0" checked name="Hidden"> Hiện</label>
+                            <input type="radio" class="form-control" asp-for="Hidden" value="1" name="Hidden" style="margin-left: 20px" ;> Ẩn</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 50px">
+                        <input class="btn btn-create-new" type="submit" value="Lưu" />
+                        <a class="btn btn-create-new text-center" href="~/Admin/AdminDiscount/Index" style="margin-left: 10px" ;>Trở lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

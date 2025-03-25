@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model DACS_WebClothes.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 70px">
+        <div class="col-md-8">
+            <div class="category">
+                <p>ĐĂNG KÍ THÀNH VIÊN</p>
+            </div>
+            <div class="card-bodi">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+                <form class="form-horizontal" asp-action="Register" asp-controller="User" method="POST">
+                    <div class="form-group row">
+                        <label asp-for="Register.Username" class="control-label col-md-3">Tên đăng nhập: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.Username"
+                                   placeholder="Nhập tên đăng nhập" required />
+                            <span asp-validation-for="Register.Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Register.FullName" class="control-label col-md-3">Họ và tên: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.FullName"
+                                   placeholder="Nhập họ và tên" required />
+                            <span asp-validation-for="Register.FullName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Register.Address" class="control-label col-md-3">Địa chỉ: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.Address"
+                                   placeholder="Yêu cầu nhập số nhà, hẻm / khu phố / ngõ, đường ...." maxlength ="40"/>
+                            <span asp-validation-for="Register.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Register.Email" class="control-label col-md-3">Email: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.Email"
+                                   placeholder="Nhập địa chỉ email" required />
+                            <span asp-validation-for="Register.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Register.Phone" class="control-label col-md-3">Số điện thoại: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" asp-for="Register.Phone"
+                                   placeholder="Nhập số điện thoại" required />
+                            <span asp-validation-for="Register.Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Register.Password" class="control-label col-md-3">Mật khẩu: </label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" asp-for="Register.Password" id="password" placeholder="Nhập mật khẩu" required
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                   title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ số, một chữ thường và một chữ hoa." />
+                            <span asp-validation-for="Register.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">Nhập lại mật khẩu: </label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="confirmPassword"
+                                   placeholder="Nhập lại mật khẩu" required
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                   title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ số, một chữ thường và một chữ hoa."
+                                   oninput="checkPasswordMatch(this);" />
+                            <div id="passwordMatchMessage"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-user-plus" style="margin-right: 10px;"></i>Đăng ký
+                            </button>
+                            <a class="btn btn-secondary" href="dang-nhap">
+                                <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>Quay lại đăng nhập
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

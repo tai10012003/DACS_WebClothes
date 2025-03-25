@@ -1,0 +1,62 @@
+﻿@model DACS_WebClothes.Models.User
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card-bodi" style="border: 1px solid black; padding: 0 100px 0 100px" ;>
+                <div class="category">
+                    <p>XEM THÔNG TIN NGƯỜI DÙNG</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" name="Username">Tên đăng nhập: </label>
+                        @Html.DisplayFor(model => model.Username)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="FullName">Họ tên: </label>
+                        @Html.DisplayFor(model => model.FullName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Address">Địa chỉ: </label>
+                        @Html.DisplayFor(model => model.Address)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Email">Email: </label>
+                        @Html.DisplayFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label class="control-label" for="Phone">Số điện thoại: </label>
+                        @Html.DisplayFor(model => model.Phone)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Quyền: </label>
+                        @Html.DisplayFor(model => model.Permission)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-center">
+                        <label class="control-label">Trạng thái tài khoản: </label>
+                        @Html.DisplayFor(model => model.Hidden)
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 50px">
+                    <a href="~/Admin/AdminUsers/Edit?id=@Model.UserId" class="btn btn-create-new">Sửa</a>
+                    <a class="btn btn-create-new text-center" href="~/Admin/AdminUsers/Index" style="margin-left: 10px" ;>Trở lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

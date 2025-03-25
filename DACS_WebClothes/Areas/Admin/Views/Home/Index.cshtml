@@ -1,0 +1,91 @@
+﻿@model List<DACS_WebClothes.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="navbar">
+    <div class="container">
+        <span class="navbar-brand">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="text-white">Xin chào Admin: @User.Identity.Name</span>
+            }
+        </span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box red">
+                <div class="icon-container">
+                    <i class="icon fas fa-shopping-cart"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Sản phẩm</h5>
+                    <p class="value">@ViewBag.NumberOfProducts</p>
+                </div>
+            </div>
+            <div class="box green">
+                <div class="icon-container">
+                    <i class="icon fas fa-chart-line"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Doanh thu</h5>
+                    <p class="value">@String.Format("{0:N0}đ", ViewBag.TotalRevenue)</p>
+                </div>
+            </div>
+            <div class="box blue">
+                <div class="icon-container">
+                    <i class="icon fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="info">
+                    <h5 class="title">Đơn hàng</h5>
+                    <p class="value">@ViewBag.NumberOfOrders</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="color:black; margin-top: 50px;">
+    <h1 style="text-align:center">ĐƠN HÀNG CẦN XÁC NHẬN</h1>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Khách hàng</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Giỏ hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.User.FullName</td>
+                            <td>@order.DateBegin.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                            <td>@order.CartDetails.Count()</td>
+                            <td>@order.Status</td>
+                            <td>
+                                <div class="text-center">
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px">
+                                        <a href="~/Admin/Home/UpdateStatus?id=@order.CartId">Xác Nhận</a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+

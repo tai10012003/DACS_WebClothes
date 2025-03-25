@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DACS_WebClothes.Models.Discount>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <h1 style="text-align:center">QUẢN LÝ MÃ GIẢM GIÁ</h1>
+    <div class="search-field d-none d-xl-block" style="margin-top: 25px" ;>
+        <form class="d-flex align-items-center" action="#">
+            <div class="form-group mb-0">
+                <input type="text" class="form-control search-input" placeholder="Tìm kiếm" name="SearchString">
+                <button type="submit" class="btn btn-success search-button ml-2">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center" style="margin-top: -40px" ;>
+        <button class="btn btn-create-new"><a href="~/Admin/AdminDiscount/Create">Tạo Mới</a></button>
+    </div>
+    <section class="attendance">
+        <div class="attendance-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> Mã giảm giá </th>
+                        <th> Giảm (%) </th>
+                        <th> Ngày hết hạn </th>
+                        <th> Ẩn/Hiện </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiscountName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiscountPercent)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExpirationDate)
+                            </td>
+                            <td>
+                                @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminDiscount/Edit?id=@item.DiscountId">Sửa</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminDiscount/Details?id=@item.DiscountId">Xem chi tiết</a>
+                                    </button>
+                                    <button class="btn btn-create-new" type="button" style="margin-top: 5px" ;>
+                                        <a href="~/Admin/AdminDiscount/Delete?id=@item.DiscountId">Xóa</a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</div>
+
+
+
+
